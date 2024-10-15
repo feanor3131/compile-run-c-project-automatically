@@ -1,0 +1,3 @@
+这个项目是平常可以用到的一种编写简单数据处理工程的范本。博主是核物理实验方面的硕士，这是一个用于在束gamma谱学事件重构的c++程序，是从师兄那里继承过来的。其中Link开头的三个文件是用来把自己定义的struct可以添加到输出的`.root`文件里的，这部分操作叫做ROOT的**字典生成**。其中`Linkdef.h`是唯一一个由用户自己编写的头文件，告诉root需要为哪些类生成字典,`LinkDict.cpp,LinkDict_rdict.pcm`分别是ROOT自动生成的字典实现文件和ROOT预编译模块。后两个文件可以通过命令`rootcint -f LinkDict.cpp -c par.h tree.h Linkdef.h`生成。本项目有两个自定义的struct是Energy和Data。
+
+若想一次运行一个程序，则可以通过命令`inbeam 文件号`进行(具体实现请看代码)。若想一次运行多个程序处理多个文件，则可以通过runf.h文件实现。具体是通过`./runf.h ./inbeam`。若是想将任务提交到后台的话，则可以通过命令`nohup ./runf.sh ./inbeam &> runf.log &`实现。任务在后台运行时，可以通过查看`xx`目录下的文件来检查运行进度，可以在根目录下用命令`tail -f ./xx/10.txt`(查看root010.root文件的处理进程)实现。
